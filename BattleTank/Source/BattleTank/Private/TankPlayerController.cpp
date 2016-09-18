@@ -4,6 +4,7 @@
 #include "TankPlayerController.h"
 
 
+// Called when the game starts or when spawned
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -19,10 +20,26 @@ void ATankPlayerController::BeginPlay()
 	}
 }
 
+// Called every frame
+void ATankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	//Aim
+	AimTowardsCrosshair();
 
+}
 ATank *ATankPlayerController::GetControlledTank() const
 {
 	auto ControlledPawn = GetPawn();
 	if (!ControlledPawn) { return nullptr; }
 	return Cast<ATank>(ControlledPawn);
+}
+
+void ATankPlayerController::AimTowardsCrosshair()
+{
+	if (!GetControlledTank()) { return; }
+
+	//Get world location if linetrace through crosshair
+	//If hit
+		//Tell controlled tank to aim at this point
 }
